@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:apple",
+    "minecraft:nether_star",
+    "minecraft:cookie",
+    "minecraft:pumpkin_pie",
+    "minecraft:enchanted_golden_apple",
+    "minecraft:golden_apple",
+    "minecraft:cake",
+    "minecraft:bread",
+    "minecraft:potion",
+    "minecraft:baked_potato",
+    "minecraft:melon_slice",
+    "minecraft:golden_carrot",
+    "minecraft:dried_kelp",
+    "minecraft:sugar",
+    "minecraft:sweet_berries",
+    "minecraft:milk_bucket"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:apple",
+    "minecraft:pumpkin_pie",
+    "minecraft:sugar",
+    "minecraft:cooked_cod",
+    "minecraft:cooked_salmon",
+    "minecraft:golden_apple",
+    "minecraft:cake",
+    "minecraft:bread",
+    "minecraft:potion",
+    "minecraft:baked_potato",
+    "minecraft:melon_slice",
+    "minecraft:golden_carrot",
+    "minecraft:dried_kelp",
+    "minecraft:sweet_berries",
+    "minecraft:milk_bucket",
+    "minecraft:water_bucket"
+  ]
+}

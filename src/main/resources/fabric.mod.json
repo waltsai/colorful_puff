@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "colorfulpuff",
+  "version": "${version}",
+
+  "name": "Colorful Puff 泡芙模組!",
+  "description": "此模組源自 §e§l 戀 Koi.§r§k 的原創基岩版組件，該組件的Fabric版本為粉絲所製作。\n§4此模組嚴禁轉載!",
+  "authors": [
+    "ChillyCoffey"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/colorfulpuff/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.chillycoffey.colorfulpuff.ModInit"
+    ],
+    "client": [
+      "com.chillycoffey.colorfulpuff.ClientModInit"
+    ]
+  },
+  "mixins": [
+    "modid.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=16"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cactus",
+    "minecraft:sweet_berry_bush",
+    "minecraft:wither_rose",
+    "minecraft:zombie_head",
+    "minecraft:player_head",
+    "minecraft:skeleton_skull",
+    "minecraft:wither_skeleton_skull",
+    "minecraft:creeper_head",
+    "minecraft:tnt",
+    "minecraft:cobweb",
+    "minecraft:dragon_egg",
+    "minecraft:lava"
+  ]
+}
