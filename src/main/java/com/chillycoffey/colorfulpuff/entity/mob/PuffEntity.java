@@ -263,14 +263,7 @@ public class PuffEntity extends PuffBaseEntity {
                     }
                 }
             }
-
-            ActionResult actionResult = super.interactMob(player, hand);
-            if (!actionResult.isAccepted() && hand == Hand.MAIN_HAND) {
-                this.setSitting(!this.isSitting());
-                return ActionResult.SUCCESS;
-            }
-
-            if(this.isTamed()) {
+            else if(this.isTamed()) {
                 if (ClothType.byItem(item) != null && !this.havingCloth(ClothType.byItem(item))) {
                     this.setClothType(ClothType.byItem(item));
                     this.world.sendEntityStatus(this, (byte) (61 + ClothType.byItem(item).getId()));
@@ -317,6 +310,12 @@ public class PuffEntity extends PuffBaseEntity {
                 }
             }
 
+            ActionResult actionResult = super.interactMob(player, hand);
+            if (!actionResult.isAccepted() && hand == Hand.MAIN_HAND) {
+                this.setSitting(!this.isSitting());
+                return ActionResult.SUCCESS;
+            }
+
             return super.interactMob(player, hand);
         }
     }
@@ -331,7 +330,7 @@ public class PuffEntity extends PuffBaseEntity {
         }
     }
 
-    public void setBaby(boolean baby, boolean stopGrowing) {
+    public void setBaby(boolean baby) {
         this.setBreedingAge(baby ? -36000 : 0);
     }
 

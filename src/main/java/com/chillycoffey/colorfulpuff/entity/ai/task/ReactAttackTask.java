@@ -27,6 +27,8 @@ public class ReactAttackTask extends Task<PuffBaseEntity> {
     protected boolean shouldRun(ServerWorld serverWorld, PuffBaseEntity mobEntity) {
         if (mobEntity.getRecentDamageSource() == null) {
             return false;
+        } else if (mobEntity.isBaby()) {
+            return false;
         } else {
             Entity target = mobEntity.getRecentDamageSource().getAttacker();
             if(target instanceof LivingEntity) {
