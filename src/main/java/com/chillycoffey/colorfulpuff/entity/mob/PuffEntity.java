@@ -334,6 +334,15 @@ public class PuffEntity extends PuffBaseEntity {
         this.setBreedingAge(baby ? -36000 : 0);
     }
 
+    @Override
+    public float getScaleFactor() {
+        if(this.isBaby()) {
+            return this.getClothType() == PuffEntity.ClothType.HONEY ? 0.66F * 0.909F : 0.66F;
+        } else {
+            return this.getClothType() == PuffEntity.ClothType.HONEY ? 0.88F * 0.909F : 0.88F;
+        }
+    }
+
     /*
     @Override
     public float getPathfindingFavor(BlockPos pos, WorldView world) {
@@ -503,7 +512,7 @@ public class PuffEntity extends PuffBaseEntity {
         CLOTH_TYPE = DataTracker.registerData(PuffEntity.class, TrackedDataHandlerRegistry.INTEGER);
         EYE_TYPE = DataTracker.registerData(PuffEntity.class, TrackedDataHandlerRegistry.INTEGER);
         PERSONALITY = DataTracker.registerData(PuffEntity.class, TrackedDataHandlerRegistry.INTEGER);
-        SENSORS = ImmutableList.of(SensorType.HURT_BY, SensorType.NEAREST_ITEMS, SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, ModEntities.PUFF_SPECIFIC_SENSOR);
+        SENSORS = ImmutableList.of(SensorType.HURT_BY, SensorType.NEAREST_ITEMS, SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, ModEntities.PUFF_SPECIFIC_SENSOR, ModEntities.NEAREST_DANGEROUS_ENTITIES);
         MEMORY_MODULES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.PATH, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.VISIBLE_MOBS, MemoryModuleType.NEAREST_VISIBLE_WANTED_ITEM, MemoryModuleType.IS_TEMPTED, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.BREED_TARGET, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.NEAREST_REPELLENT, ModEntities.VISIBLE_INTERESTED_ENTITIES, MemoryModuleType.HOME, MemoryModuleType.LAST_SLEPT, MemoryModuleType.LAST_WOKEN, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.ANGRY_AT, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.NEAREST_HOSTILE);
     }
 

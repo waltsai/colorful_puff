@@ -1,6 +1,7 @@
 package com.chillycoffey.colorfulpuff.core;
 
 import com.chillycoffey.colorfulpuff.ModInit;
+import com.chillycoffey.colorfulpuff.entity.ai.brain.sensor.NearestPuffDangerousLivingEntitySensor;
 import com.chillycoffey.colorfulpuff.entity.ai.brain.sensor.PuffSpecificSensor;
 import com.chillycoffey.colorfulpuff.entity.mob.PuffEntity;
 import com.chillycoffey.colorfulpuff.mixin.MemoryModuleTypeInvoker;
@@ -32,6 +33,7 @@ public class ModEntities {
     public static final EntityType<PuffEntity> PUFF = EntityType.Builder.create(PuffEntity::new, SpawnGroup.CREATURE).setDimensions(0.6F,1.68F).maxTrackingRange(32).build("puff");
     public static Schedule PUFF_ADULT;
     public static SensorType<PuffSpecificSensor> PUFF_SPECIFIC_SENSOR;
+    public static SensorType<NearestPuffDangerousLivingEntitySensor> NEAREST_DANGEROUS_ENTITIES;
     public static MemoryModuleType<List<Entity>> VISIBLE_INTERESTED_ENTITIES;
 
     public static void registerEntities() {
@@ -44,6 +46,7 @@ public class ModEntities {
 
     public static void registerBrain() {
         PUFF_SPECIFIC_SENSOR = SensorTypeInvoker.invokeRegister("puff_specific_sensor", PuffSpecificSensor::new);
+        NEAREST_DANGEROUS_ENTITIES = SensorTypeInvoker.invokeRegister("nearest_dangerous_entities", NearestPuffDangerousLivingEntitySensor::new);
         VISIBLE_INTERESTED_ENTITIES = MemoryModuleTypeInvoker.invokeRegister("visible_interested_entities");
     }
 }
