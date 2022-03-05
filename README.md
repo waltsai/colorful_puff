@@ -1,8 +1,13 @@
-# Fabric Example Mod
+# Colorful Puff
 
-## Setup
+Originated by Koi, Colorful Puff Addon adds entity "puff" and other stuffs.
+This addon is being converted to Fabric by Waltsai, which can be played in Java Edition.
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+## Installation
+
+1. Download and run the Fabric installer.
+2. Download the Fabric API and move it to the mods folder (.minecraft/mods).
+3. Download the mod and move it to the mods folder (.minecraft/mods).
 
 ## License
 
