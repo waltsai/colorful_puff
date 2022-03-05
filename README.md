@@ -3,6 +3,7 @@
 ![image](https://github.com/waltsai/colorful_puff/blob/master/image.png)
 
 Originated by Koi, Colorful Puff Addon adds entity "puff" and other stuffs.
+
 This addon is being converted to Fabric by Waltsai, which can be played in Java Edition.
 
 ## Installation
