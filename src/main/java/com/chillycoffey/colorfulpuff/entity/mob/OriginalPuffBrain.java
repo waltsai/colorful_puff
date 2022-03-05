@@ -49,7 +49,7 @@ public class OriginalPuffBrain {
     }
 
     public static void addIdleActivities(Brain<PuffEntity> brain) {
-        brain.setTaskList(Activity.IDLE, ImmutableList.of(Pair.of(0, new StayWhileSittingTask()), Pair.of(8, new UpdateTargetTask(OriginalPuffBrain::getAngryAtEntity)), Pair.of(1, new TemptTask((entity) -> 1.0F)), Pair.of(2, GoToRememberedPositionTask.toBlock(MemoryModuleType.NEAREST_REPELLENT, 1.0F, 8, true)), Pair.of(3, makeFollowEntitiesTask()), Pair.of(5, new WalkToNearestVisibleWantedItemTask<>(1.06F, true, 6)), Pair.of(6, makeRandomStrollTask(true)), Pair.of(99, new ScheduleActivityTask())), ImmutableSet.of(Pair.of(MemoryModuleType.ATTACK_TARGET, MemoryModuleState.VALUE_ABSENT)));
+        brain.setTaskList(Activity.IDLE, ImmutableList.of(Pair.of(0, new StayWhileSittingTask()), Pair.of(8, new UpdateTargetTask(OriginalPuffBrain::getAngryAtEntity)), Pair.of(1, GoToRememberedPositionTask.toEntity(MemoryModuleType.NEAREST_HOSTILE, 1.05F, 8, true)), Pair.of(1, new TemptTask((entity) -> 1.0F)), Pair.of(2, GoToRememberedPositionTask.toBlock(MemoryModuleType.NEAREST_REPELLENT, 1.0F, 8, true)), Pair.of(3, makeFollowEntitiesTask()), Pair.of(5, new WalkToNearestVisibleWantedItemTask<>(1.06F, true, 6)), Pair.of(6, makeRandomStrollTask(true)), Pair.of(99, new ScheduleActivityTask())), ImmutableSet.of(Pair.of(MemoryModuleType.ATTACK_TARGET, MemoryModuleState.VALUE_ABSENT)));
     }
 
     public static void addRestActivities(Brain<PuffEntity> brain) {
