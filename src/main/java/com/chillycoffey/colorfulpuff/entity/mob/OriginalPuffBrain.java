@@ -45,7 +45,7 @@ public class OriginalPuffBrain {
     }
 
     public static void addCoreActivities(Brain<PuffEntity> brain) {
-        brain.setTaskList(Activity.CORE, 0, ImmutableList.of(new StayAboveWaterTask(0.8F), new AvoidAttackerTask(0.9F, 1.1F), new LookAroundTask(40, 120), new WanderAroundTask(), new OpenDoorsTask(), new TemptationCooldownTask(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS), new FindPointOfInterestTask(PointOfInterestType.HOME, MemoryModuleType.HOME, false, Optional.of((byte)14)), new WakeUpTask(), new ForgetAngryAtTargetTask<>(), new ReactAttackTask()));
+        brain.setTaskList(Activity.CORE, 0, ImmutableList.of(new StayAboveWaterTask(0.8F), new AvoidAttackerTask(0.9F, 1.1F), new LookAroundTask(80, 160), new WanderAroundTask(), new OpenDoorsTask(), new TemptationCooldownTask(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS), new FindPointOfInterestTask(PointOfInterestType.HOME, MemoryModuleType.HOME, false, Optional.of((byte)14)), new WakeUpTask(), new ForgetAngryAtTargetTask<>(), new ReactAttackTask()));
     }
 
     public static void addIdleActivities(Brain<PuffEntity> brain) {

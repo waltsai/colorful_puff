@@ -22,7 +22,7 @@ public class ModItems {
         public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
             super.inventoryTick(stack, world, entity, slot, selected);
             stack.getOrCreateNbt().put(EntityType.ENTITY_TAG_KEY, new NbtCompound());
-            stack.getOrCreateNbt().getCompound(EntityType.ENTITY_TAG_KEY).putInt("Age", -1);
+            stack.getOrCreateNbt().getCompound(EntityType.ENTITY_TAG_KEY).putInt("Age", 0);
             stack.getOrCreateNbt().getCompound(EntityType.ENTITY_TAG_KEY).putBoolean("CanGrow", true);
         }
     };
@@ -32,6 +32,7 @@ public class ModItems {
             super.inventoryTick(stack, world, entity, slot, selected);
             stack.getOrCreateNbt().put(EntityType.ENTITY_TAG_KEY, new NbtCompound());
             stack.getOrCreateNbt().getCompound(EntityType.ENTITY_TAG_KEY).putInt("Age", -36000);
+            stack.getOrCreateNbt().getCompound(EntityType.ENTITY_TAG_KEY).putInt("ForcedAge", 0);
             stack.getOrCreateNbt().getCompound(EntityType.ENTITY_TAG_KEY).putBoolean("CanGrow", false);
         }
     };

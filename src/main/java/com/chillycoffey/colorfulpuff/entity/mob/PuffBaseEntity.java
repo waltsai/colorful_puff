@@ -3,12 +3,16 @@ package com.chillycoffey.colorfulpuff.entity.mob;
 import com.chillycoffey.colorfulpuff.core.ModParticles;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.MinecraftServer;
@@ -30,7 +34,6 @@ public abstract class PuffBaseEntity extends TameableEntity {
     public float blinkingAge;
     public boolean isEntityBlinking;
     private int noBlinkingAge;
-    private long lastSlept;
 
     public PuffBaseEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
@@ -75,6 +78,8 @@ public abstract class PuffBaseEntity extends TameableEntity {
             this.setInBlinkAnimation(false);
         }
 
+        System.out.println(this.world.isClient + ":" + this.getBreedingAge());
+
         if(this.noBlinkingAge == 0) {
             int i = this.random.nextInt(11999);
             if (i < 35) {
@@ -82,7 +87,7 @@ public abstract class PuffBaseEntity extends TameableEntity {
                 this.noBlinkingAge = 140;
             } else if (i < 235) {
                 this.setInBlinkAnimation(true);
-                this.noBlinkingAge = 15;
+                this.noBlinkingAge = 5;
             }
         }
 
@@ -116,6 +121,14 @@ public abstract class PuffBaseEntity extends TameableEntity {
         }
     }
 
+    @Override
+    public void onTrackedDataSet(TrackedData<?> data) {
+        if(TAMEABLE_FLAGS.equals(data)) {
+            this.calculateDimensions();
+        }
+        super.onTrackedDataSet(data);
+    }
+
     public void sleep(BlockPos pos) {
         super.sleep(pos);
         this.brain.remember(MemoryModuleType.LAST_SLEPT, this.world.getTime());
@@ -126,6 +139,22 @@ public abstract class PuffBaseEntity extends TameableEntity {
     public void wakeUp() {
         super.wakeUp();
         this.brain.remember(MemoryModuleType.LAST_WOKEN, this.world.getTime());
+    }
+
+    @Override
+    public float getScaleFactor() {
+        if(this.isBaby()) {
+            return 0.66F;
+        } else {
+            return 0.88F;
+        }
+    }
+
+    @Override
+    public EntityDimensions getDimensions(EntityPose pose) {
+        return this.isInSittingPose() ?
+                super.getDimensions(EntityPose.STANDING).scaled(1.0F, 0.671875F)
+                : super.getDimensions(pose);
     }
 
     static {

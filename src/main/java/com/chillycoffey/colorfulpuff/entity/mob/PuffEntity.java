@@ -6,6 +6,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.entity.model.PiglinEntityModel;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.inventory.StackReference;
@@ -57,10 +59,10 @@ public class PuffEntity extends PuffBaseEntity {
     public static final TrackedData<Integer> CLOTH_TYPE;
     public static final TrackedData<Integer> EYE_TYPE;
     public static final TrackedData<Integer> PERSONALITY;
+    public static final TrackedData<Boolean> CAN_GROW;
     private ClothType prevCloth;
     private int maxAir = 300;
     private boolean isFireImmune = false;
-    private boolean canGrow;
 
     public PuffEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
@@ -104,8 +106,13 @@ public class PuffEntity extends PuffBaseEntity {
     public void tickMovement() {
         super.tickMovement();
 
-        if(!this.canGrow) {
-            this.setBreedingAge(-36000);
+        if (this.isAlive() && this.canGrow()) {
+            int i = this.getBreedingAge();
+            if (i < 0) {
+                this.setBreedingAge(--i);
+            } else if (i > 0) {
+                this.setBreedingAge(++i);
+            }
         }
     }
 
@@ -182,6 +189,7 @@ public class PuffEntity extends PuffBaseEntity {
         this.dataTracker.startTracking(CLOTH_TYPE, 0);
         this.dataTracker.startTracking(EYE_TYPE, 0);
         this.dataTracker.startTracking(PERSONALITY, 0);
+        this.dataTracker.startTracking(CAN_GROW, true);
     }
 
     @Override
@@ -190,7 +198,7 @@ public class PuffEntity extends PuffBaseEntity {
         nbt.putInt("ClothType", this.getClothType().getId());
         nbt.putInt("EyeType", this.getEyeType().getId());
         nbt.putInt("Personality", this.getPersonality().getId());
-        nbt.putBoolean("CanGrow", this.canGrow);
+        nbt.putBoolean("CanGrow", this.canGrow());
     }
 
     @Override
@@ -199,7 +207,7 @@ public class PuffEntity extends PuffBaseEntity {
         this.setClothType(ClothType.byId(nbt.getInt("ClothType")));
         this.setEyeType(EyeType.byId(nbt.getInt("EyeType")));
         this.setPersonality(PersonalityType.byId(nbt.getInt("Personality")));
-        this.canGrow = nbt.getBoolean("CanGrow");
+        this.setCanGrow(nbt.getBoolean("CanGrow"));
 
         if (this.world instanceof ServerWorld) {
             this.reinitializeBrain((ServerWorld) this.world);
@@ -263,7 +271,14 @@ public class PuffEntity extends PuffBaseEntity {
                     }
                 }
             }
-            else if(this.isTamed()) {
+            if(itemStack.isOf(Items.ENCHANTED_GOLDEN_APPLE)) {
+                this.setCanGrow(true);
+                this.growUp(28800);
+                if (!player.getAbilities().creativeMode) {
+                    itemStack.decrement(1);
+                }
+            }
+            if(this.isTamed()) {
                 if (ClothType.byItem(item) != null && !this.havingCloth(ClothType.byItem(item))) {
                     this.setClothType(ClothType.byItem(item));
                     this.world.sendEntityStatus(this, (byte) (61 + ClothType.byItem(item).getId()));
@@ -274,40 +289,36 @@ public class PuffEntity extends PuffBaseEntity {
                             player.giveItemStack(new ItemStack(Items.GLASS_BOTTLE, 1));
                             itemStack.decrement(1);
                         }
+                        this.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 160, 1));
                     }
                     this.updateAttributes();
 
                     return ActionResult.SUCCESS;
                 }
-
-                if(itemStack.isOf(Items.ENCHANTED_GOLDEN_APPLE)) {
-                    this.canGrow = true;
-                }
-            } else {
-                if (itemStack.isIn(PuffEntity.getPuffTamedItem(this))) {
-                    if (itemStack.isOf(Items.MILK_BUCKET)) {
-                        if (!player.getAbilities().creativeMode) {
-                            itemStack.decrement(1);
-                            player.giveItemStack(new ItemStack(Items.BUCKET, 1));
-                        }
-                    } else {
-                        if (!player.getAbilities().creativeMode) {
-                            itemStack.decrement(1);
-                        }
+            }
+            if (!this.isTamed() && itemStack.isIn(PuffEntity.getPuffTamedItem(this))) {
+                if (itemStack.isOf(Items.MILK_BUCKET)) {
+                    if (!player.getAbilities().creativeMode) {
+                        itemStack.decrement(1);
+                        player.giveItemStack(new ItemStack(Items.BUCKET, 1));
                     }
-
-                    if ((itemStack.isOf(Items.GOLDEN_APPLE) || itemStack.isOf(Items.ENCHANTED_GOLDEN_APPLE)) || this.random.nextInt(3) == 0) {
-                        this.setOwner(player);
-                        this.navigation.stop();
-                        this.setTarget(null);
-                        this.setSitting(true);
-                        this.world.sendEntityStatus(this, (byte) 7);
-                    } else {
-                        this.world.sendEntityStatus(this, (byte) 6);
+                } else {
+                    if (!player.getAbilities().creativeMode) {
+                        itemStack.decrement(1);
                     }
-
-                    return ActionResult.SUCCESS;
                 }
+
+                if ((itemStack.isOf(Items.GOLDEN_APPLE) || itemStack.isOf(Items.ENCHANTED_GOLDEN_APPLE)) || this.random.nextInt(3) == 0) {
+                    this.setOwner(player);
+                    this.navigation.stop();
+                    this.setTarget(null);
+                    this.setSitting(true);
+                    this.world.sendEntityStatus(this, (byte) 7);
+                } else {
+                    this.world.sendEntityStatus(this, (byte) 6);
+                }
+
+                return ActionResult.SUCCESS;
             }
 
             ActionResult actionResult = super.interactMob(player, hand);
@@ -330,6 +341,11 @@ public class PuffEntity extends PuffBaseEntity {
         } else {
             return bl;
         }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
     }
 
     public void setBaby(boolean baby) {
@@ -395,6 +411,11 @@ public class PuffEntity extends PuffBaseEntity {
     }
 
     //Utils
+
+    @Override
+    protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
+        return super.getActiveEyeHeight(pose, dimensions);
+    }
 
     public static TagKey<Item> getPuffTemptedItem(PuffEntity entity) {
         if (false && !entity.isBaby()) {
@@ -502,6 +523,14 @@ public class PuffEntity extends PuffBaseEntity {
         dataTracker.set(EYE_TYPE, type.getId());
     }
 
+    public boolean canGrow() {
+        return dataTracker.get(CAN_GROW);
+    }
+
+    public void setCanGrow(boolean canGrow) {
+        dataTracker.set(CAN_GROW, canGrow);
+    }
+
     public boolean havingCloth(ClothType... type) {
         return Arrays.stream(type).filter((e) -> e == this.getClothType()).toArray().length > 0;
     }
@@ -514,6 +543,7 @@ public class PuffEntity extends PuffBaseEntity {
         CLOTH_TYPE = DataTracker.registerData(PuffEntity.class, TrackedDataHandlerRegistry.INTEGER);
         EYE_TYPE = DataTracker.registerData(PuffEntity.class, TrackedDataHandlerRegistry.INTEGER);
         PERSONALITY = DataTracker.registerData(PuffEntity.class, TrackedDataHandlerRegistry.INTEGER);
+        CAN_GROW = DataTracker.registerData(PuffEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
         SENSORS = ImmutableList.of(SensorType.HURT_BY, SensorType.NEAREST_ITEMS, SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, ModEntities.PUFF_SPECIFIC_SENSOR, ModEntities.NEAREST_DANGEROUS_ENTITIES);
         MEMORY_MODULES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.PATH, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.VISIBLE_MOBS, MemoryModuleType.NEAREST_VISIBLE_WANTED_ITEM, MemoryModuleType.IS_TEMPTED, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.BREED_TARGET, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.NEAREST_REPELLENT, ModEntities.VISIBLE_INTERESTED_ENTITIES, MemoryModuleType.HOME, MemoryModuleType.LAST_SLEPT, MemoryModuleType.LAST_WOKEN, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.ANGRY_AT, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.NEAREST_HOSTILE);
     }
