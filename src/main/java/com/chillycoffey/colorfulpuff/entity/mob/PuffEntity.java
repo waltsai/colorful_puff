@@ -104,7 +104,7 @@ public class PuffEntity extends PuffBaseEntity {
     public void tickMovement() {
         super.tickMovement();
 
-        if(!canGrow) {
+        if(!this.canGrow) {
             this.setBreedingAge(-36000);
         }
     }
@@ -190,6 +190,7 @@ public class PuffEntity extends PuffBaseEntity {
         nbt.putInt("ClothType", this.getClothType().getId());
         nbt.putInt("EyeType", this.getEyeType().getId());
         nbt.putInt("Personality", this.getPersonality().getId());
+        nbt.putBoolean("CanGrow", this.canGrow);
     }
 
     @Override
@@ -198,6 +199,7 @@ public class PuffEntity extends PuffBaseEntity {
         this.setClothType(ClothType.byId(nbt.getInt("ClothType")));
         this.setEyeType(EyeType.byId(nbt.getInt("EyeType")));
         this.setPersonality(PersonalityType.byId(nbt.getInt("Personality")));
+        this.canGrow = nbt.getBoolean("CanGrow");
 
         if (this.world instanceof ServerWorld) {
             this.reinitializeBrain((ServerWorld) this.world);
@@ -213,8 +215,6 @@ public class PuffEntity extends PuffBaseEntity {
         this.setClothType(null);
         this.setEyeType(null);
         this.setPersonality(null);
-        this.setBaby(true);
-        this.canGrow = false;
         return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 
@@ -312,8 +312,10 @@ public class PuffEntity extends PuffBaseEntity {
 
             ActionResult actionResult = super.interactMob(player, hand);
             if (!actionResult.isAccepted() && hand == Hand.MAIN_HAND) {
-                this.setSitting(!this.isSitting());
-                return ActionResult.SUCCESS;
+                if(this.isTamed()) {
+                    this.setSitting(!this.isSitting());
+                    return ActionResult.SUCCESS;
+                }
             }
 
             return super.interactMob(player, hand);
@@ -513,7 +515,7 @@ public class PuffEntity extends PuffBaseEntity {
         EYE_TYPE = DataTracker.registerData(PuffEntity.class, TrackedDataHandlerRegistry.INTEGER);
         PERSONALITY = DataTracker.registerData(PuffEntity.class, TrackedDataHandlerRegistry.INTEGER);
         SENSORS = ImmutableList.of(SensorType.HURT_BY, SensorType.NEAREST_ITEMS, SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, ModEntities.PUFF_SPECIFIC_SENSOR, ModEntities.NEAREST_DANGEROUS_ENTITIES);
-        MEMORY_MODULES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.PATH, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.VISIBLE_MOBS, MemoryModuleType.NEAREST_VISIBLE_WANTED_ITEM, MemoryModuleType.IS_TEMPTED, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.BREED_TARGET, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.NEAREST_REPELLENT, ModEntities.VISIBLE_INTERESTED_ENTITIES, MemoryModuleType.HOME, MemoryModuleType.LAST_SLEPT, MemoryModuleType.LAST_WOKEN, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.ANGRY_AT, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.NEAREST_HOSTILE);
+        MEMORY_MODULES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.PATH, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.VISIBLE_MOBS, MemoryModuleType.NEAREST_VISIBLE_WANTED_ITEM, MemoryModuleType.IS_TEMPTED, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.BREED_TARGET, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.NEAREST_REPELLENT, ModEntities.VISIBLE_INTERESTED_ENTITIES, MemoryModuleType.HOME, MemoryModuleType.LAST_SLEPT, MemoryModuleType.LAST_WOKEN, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.ANGRY_AT, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.NEAREST_HOSTILE);
     }
 
     public enum ClothType {
