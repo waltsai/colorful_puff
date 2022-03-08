@@ -17,7 +17,7 @@ import net.minecraft.util.math.Vec3f;
 
 @Environment(EnvType.CLIENT)
 public abstract class PuffEyeFeatureRenderer<T extends PuffBaseEntity, M extends PuffEntityModel<T>> extends FeatureRenderer<T,M> {
-    private final float BLINKING_TICK = 1.668f * 2;
+    private static final float BLINKING_TICK = 1.668f * 2;
 
     public PuffEyeFeatureRenderer(FeatureRendererContext<T, M> context) {
         super(context);
@@ -52,7 +52,7 @@ public abstract class PuffEyeFeatureRenderer<T extends PuffBaseEntity, M extends
 
             if(entity.isEntityBlinking && f <= BLINKING_TICK) {
                 matrices.push();
-                setEyelidCoverRate(matrices, Math.min(Math.max(Math.abs(f - BLINKING_TICK / 2F) / (BLINKING_TICK / 2F), 0), 1), headPitch, entity.isInSittingPose(), false);
+                setEyelidCoverRate(matrices, Math.min(Math.max(Math.abs(f - BLINKING_TICK / 2F) / (BLINKING_TICK / 2F), 0), 1), headPitch, entity.isInSittingPose(), entity.hasVehicle());
                 this.getContextModel().eyes.render(matrices, vertexConsumer, light, LivingEntityRenderer.getOverlay(entity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
                 matrices.pop();
             } else {
@@ -67,7 +67,7 @@ public abstract class PuffEyeFeatureRenderer<T extends PuffBaseEntity, M extends
 
 
 
-    private void setEyelidCoverRate(MatrixStack matrices, float f, float headPitch, boolean isSitting, boolean isSleeping) {
+    private void setEyelidCoverRate(MatrixStack matrices, float f, float headPitch, boolean isSitting, boolean isRiding) {
         float offset = (1 - f) * -0.0625F;
         matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(headPitch));
 
@@ -75,6 +75,7 @@ public abstract class PuffEyeFeatureRenderer<T extends PuffBaseEntity, M extends
 
         matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-headPitch));
         matrices.translate(0, (isSitting ? 0.65625F : 0.0F), 0);
+        matrices.translate(0, (isRiding ? 0.53125F : 0.0F), 0);
         matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(headPitch));
 
         matrices.scale(1, f, 1);

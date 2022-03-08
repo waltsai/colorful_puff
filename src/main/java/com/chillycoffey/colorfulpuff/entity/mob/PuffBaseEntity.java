@@ -7,9 +7,12 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.PiglinBruteEntity;
+import net.minecraft.entity.mob.PiglinEntity;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.WolfEntity;
@@ -63,6 +66,15 @@ public abstract class PuffBaseEntity extends TameableEntity {
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("blink", this.isInBlinkAnimation());
+    }
+
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        if (!this.world.isClient) {
+            this.setSitting(false);
+        }
+
+        return super.damage(source, amount);
     }
 
     public void tickMovement() {

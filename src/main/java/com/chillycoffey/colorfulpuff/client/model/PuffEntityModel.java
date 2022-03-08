@@ -73,23 +73,34 @@ public class PuffEntityModel<T extends PuffBaseEntity> extends PlayerEntityModel
             this.body.pivotY = 0.0F + k;
             this.leftArm.pivotY = 2.0F + k;
             this.rightArm.pivotY = 2.0F + k;
-
-            this.hat.copyTransform(this.head);
-            this.jacket.copyTransform(this.body);
-            this.leftSleeve.copyTransform(this.leftArm);
-            this.rightSleeve.copyTransform(this.rightArm);
-            this.leftPants.copyTransform(this.leftLeg);
-            this.rightPants.copyTransform(this.rightLeg);
+        } else if(this.riding) {
+            super.setAngles(livingEntity, f, g, h, i, j);
+            float k = 10.5F;
+            this.rightLeg.pivotY = 12.0F + k;
+            this.leftLeg.pivotY = 12.0F + k;
+            this.head.pivotY = 0.0F + k;
+            this.eyes.pivotY = 0.0F + k;
+            this.eyebrows.pivotY = 0.0F + k;
+            this.body.pivotY = 0.0F + k;
+            this.leftArm.pivotY = 2.0F + k;
+            this.rightArm.pivotY = 2.0F + k;
         } else {
             super.setAngles(livingEntity, f, g, h, i, j);
         }
 
-        eyes.pitch = head.pitch;
-        eyes.yaw = head.yaw;
-        eyes.roll = head.roll;
-        this.eyebrows.copyTransform(this.head);
+        this.eyes.pitch = this.head.pitch;
+        this.eyes.yaw = this.head.yaw;
+        this.eyes.roll = this.head.roll;
+
         this.eyes.visible = true;
         this.eyebrows.visible = true;
+        this.eyebrows.copyTransform(this.head);
+        this.hat.copyTransform(this.head);
+        this.jacket.copyTransform(this.body);
+        this.leftSleeve.copyTransform(this.leftArm);
+        this.rightSleeve.copyTransform(this.rightArm);
+        this.leftPants.copyTransform(this.leftLeg);
+        this.rightPants.copyTransform(this.rightLeg);
     }
 
     @Override
