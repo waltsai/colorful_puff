@@ -1,6 +1,6 @@
 # Colorful Puff
 
-![image](https://github.com/waltsai/colorful_puff/blob/master/image.png)
+![image](https://user-images.githubusercontent.com/42564593/157559423-63a22b34-f470-4237-b7ba-b8a5e8c26bd6.png)
 
 Originated by Koi, Colorful Puff Addon adds entity "puff" and other stuffs.
 
