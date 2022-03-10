@@ -15,6 +15,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3f;
 
+
 @Environment(EnvType.CLIENT)
 public abstract class PuffEyeFeatureRenderer<T extends PuffBaseEntity, M extends PuffEntityModel<T>> extends FeatureRenderer<T,M> {
     private static final float BLINKING_TICK = 1.668f * 2;
@@ -60,6 +61,7 @@ public abstract class PuffEyeFeatureRenderer<T extends PuffBaseEntity, M extends
                     entity.isEntityBlinking = false;
                 }
                 matrices.translate(0, (entity.isInSittingPose() ? 0.65625F : 0.0F), 0);
+                matrices.translate(0, (entity.hasVehicle() ? 0.53125F : 0.0F), 0);
                 this.getContextModel().eyes.render(matrices, vertexConsumer, light, LivingEntityRenderer.getOverlay(entity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
             }
         }

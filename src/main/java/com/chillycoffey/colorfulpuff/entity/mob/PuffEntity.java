@@ -46,11 +46,8 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.system.CallbackI;
 
 import java.util.Arrays;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Random;
 
 public class PuffEntity extends PuffBaseEntity {
@@ -545,7 +542,7 @@ public class PuffEntity extends PuffBaseEntity {
         PERSONALITY = DataTracker.registerData(PuffEntity.class, TrackedDataHandlerRegistry.INTEGER);
         CAN_GROW = DataTracker.registerData(PuffEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
         SENSORS = ImmutableList.of(SensorType.HURT_BY, SensorType.NEAREST_ITEMS, SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, ModEntities.PUFF_SPECIFIC_SENSOR, ModEntities.NEAREST_DANGEROUS_ENTITIES);
-        MEMORY_MODULES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.PATH, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.VISIBLE_MOBS, MemoryModuleType.NEAREST_VISIBLE_WANTED_ITEM, MemoryModuleType.IS_TEMPTED, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.BREED_TARGET, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.NEAREST_REPELLENT, ModEntities.VISIBLE_INTERESTED_ENTITIES, MemoryModuleType.HOME, MemoryModuleType.LAST_SLEPT, MemoryModuleType.LAST_WOKEN, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.ANGRY_AT, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.NEAREST_HOSTILE);
+        MEMORY_MODULES = ImmutableList.of(MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.PATH, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.VISIBLE_MOBS, MemoryModuleType.NEAREST_VISIBLE_WANTED_ITEM, MemoryModuleType.IS_TEMPTED, MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, MemoryModuleType.BREED_TARGET, MemoryModuleType.TEMPTING_PLAYER, MemoryModuleType.NEAREST_REPELLENT, ModEntities.VISIBLE_INTERESTED_ENTITIES, MemoryModuleType.HOME, MemoryModuleType.LAST_SLEPT, MemoryModuleType.LAST_WOKEN, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.ANGRY_AT, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.NEAREST_HOSTILE, ModEntities.NEAREST_VISIBLE_RIDABLE_ANIMALS, MemoryModuleType.RIDE_TARGET);
     }
 
     public enum ClothType {

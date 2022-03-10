@@ -18,6 +18,7 @@ import net.minecraft.entity.ai.brain.sensor.Sensor;
 import net.minecraft.entity.ai.brain.sensor.SensorType;
 import net.minecraft.entity.ai.brain.sensor.TemptationsSensor;
 import net.minecraft.entity.mob.PiglinBruteBrain;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.GoatBrain;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
@@ -35,6 +36,7 @@ public class ModEntities {
     public static SensorType<PuffSpecificSensor> PUFF_SPECIFIC_SENSOR;
     public static SensorType<NearestPuffDangerousLivingEntitySensor> NEAREST_DANGEROUS_ENTITIES;
     public static MemoryModuleType<List<Entity>> VISIBLE_INTERESTED_ENTITIES;
+    public static MemoryModuleType<AnimalEntity> NEAREST_VISIBLE_RIDABLE_ANIMALS;
 
     public static void registerEntities() {
         Registry.register(Registry.ENTITY_TYPE, new Identifier(ModInit.MODID, "puff"), PUFF);
@@ -48,5 +50,6 @@ public class ModEntities {
         PUFF_SPECIFIC_SENSOR = SensorTypeInvoker.invokeRegister("puff_specific_sensor", PuffSpecificSensor::new);
         NEAREST_DANGEROUS_ENTITIES = SensorTypeInvoker.invokeRegister("nearest_dangerous_entities", NearestPuffDangerousLivingEntitySensor::new);
         VISIBLE_INTERESTED_ENTITIES = MemoryModuleTypeInvoker.invokeRegister("visible_interested_entities");
+        NEAREST_VISIBLE_RIDABLE_ANIMALS = MemoryModuleTypeInvoker.invokeRegister("nearest_visible_ridable_animal");
     }
 }
