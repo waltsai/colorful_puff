@@ -6,11 +6,15 @@ import com.chillycoffey.colorfulpuff.entity.mob.PuffEntity;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.brain.Brain;
+import net.minecraft.entity.ai.brain.LivingTargetCache;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.sensor.Sensor;
 import net.minecraft.entity.decoration.LeashKnotEntity;
+import net.minecraft.entity.mob.HoglinEntity;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
@@ -27,7 +31,7 @@ public class PuffSpecificSensor extends Sensor<PuffEntity> {
     private static final TargetPredicate TEMPTER_PREDICATE = TargetPredicate.createNonAttackable().setBaseMaxDistance(10.0D).ignoreVisibility();
 
     public Set<MemoryModuleType<?>> getOutputMemoryModules() {
-        return ImmutableSet.of(MemoryModuleType.NEAREST_REPELLENT, MemoryModuleType.TEMPTING_PLAYER, ModEntities.VISIBLE_INTERESTED_ENTITIES);
+        return ImmutableSet.of(MemoryModuleType.VISIBLE_MOBS, MemoryModuleType.NEAREST_REPELLENT, MemoryModuleType.TEMPTING_PLAYER, ModEntities.VISIBLE_INTERESTED_ENTITIES, ModEntities.NEAREST_VISIBLE_RIDABLE_ANIMALS);
     }
 
     protected void sense(ServerWorld serverWorld, PuffEntity puff) {
@@ -49,9 +53,17 @@ public class PuffSpecificSensor extends Sensor<PuffEntity> {
 
         Box box = puff.getBoundingBox().expand(16.0D, 16.0D, 16.0D);
         List<Entity> list2 = serverWorld.getEntitiesByClass(Entity.class, box, PuffSpecificSensor::puffWantedToLookAt);
-        Objects.requireNonNull(puff);
         list2.sort(Comparator.comparingDouble(puff::squaredDistanceTo));
-        brain.remember(ModEntities.VISIBLE_INTERESTED_ENTITIES, list2.stream().collect(Collectors.toList()));
+        brain.remember(ModEntities.VISIBLE_INTERESTED_ENTITIES, new ArrayList<>(list2));
+
+
+        LivingTargetCache livingTargetCache = brain.getOptionalMemory(MemoryModuleType.VISIBLE_MOBS).orElse(LivingTargetCache.empty());
+        for (LivingEntity livingEntity : livingTargetCache.iterate(livingEntity -> true)) {
+            if (livingEntity instanceof AnimalEntity animal && ridable(animal)) {
+                brain.remember(ModEntities.NEAREST_VISIBLE_RIDABLE_ANIMALS, Optional.of(animal));
+                break;
+            }
+        }
     }
 
     private boolean test(PlayerEntity player, PuffEntity puff) {
@@ -60,5 +72,9 @@ public class PuffSpecificSensor extends Sensor<PuffEntity> {
 
     private static boolean puffWantedToLookAt(Entity puff) {
         return puff instanceof FishingBobberEntity || puff instanceof LeashKnotEntity || puff instanceof MinecartEntity || puff instanceof ItemEntity;
+    }
+
+    private static boolean ridable(AnimalEntity animal) {
+        return (animal instanceof ChickenEntity && !animal.isBaby()) || (animal instanceof SheepEntity && !animal.isBaby()) || (animal instanceof CowEntity && !animal.isBaby()) || animal instanceof PigEntity || animal instanceof HorseEntity || animal instanceof AbstractDonkeyEntity;
     }
 }

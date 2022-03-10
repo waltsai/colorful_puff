@@ -75,11 +75,10 @@ public class PuffEntityModel<T extends PuffBaseEntity> extends PlayerEntityModel
             this.rightArm.pivotY = 2.0F + k;
         } else if(this.riding) {
             super.setAngles(livingEntity, f, g, h, i, j);
-            float k = 10.5F;
+            float k = 8.5F;
             this.rightLeg.pivotY = 12.0F + k;
             this.leftLeg.pivotY = 12.0F + k;
             this.head.pivotY = 0.0F + k;
-            this.eyes.pivotY = 0.0F + k;
             this.eyebrows.pivotY = 0.0F + k;
             this.body.pivotY = 0.0F + k;
             this.leftArm.pivotY = 2.0F + k;

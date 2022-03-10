@@ -90,8 +90,6 @@ public abstract class PuffBaseEntity extends TameableEntity {
             this.setInBlinkAnimation(false);
         }
 
-        System.out.println(this.world.isClient + ":" + this.getBreedingAge());
-
         if(this.noBlinkingAge == 0) {
             int i = this.random.nextInt(11999);
             if (i < 35) {
