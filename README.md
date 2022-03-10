@@ -1,17 +1,28 @@
-# Colorful Puff
+# Colorful Puff 泡芙組件 (Fabric)
 
-![image](https://github.com/waltsai/colorful_puff/blob/master/image.png)
+![image](https://user-images.githubusercontent.com/42564593/157647840-003aec44-3181-4bdb-acfd-2698c834cb78.png)
 
-Originated by Koi, Colorful Puff Addon adds entity "puff" and other stuffs.
+此組件由 Koi.戀 製作，可在基岩版上使用。此組件新增了：
+* 泡芙實體
+* 糖果生態域
+* 新方塊、新物品
+泡芙組件包含較為完整的功能，前往戀的頻道以獲得更多資訊。
 
-This addon is being converted to Fabric by Waltsai, which can be played in Java Edition.
+而泡芙模組則由 Waltsai 進行代碼重寫，使其能夠於Fabric平台上運行。
 
-## Installation
+此模組套用CC0許可協議。
 
-1. Download and run the Fabric installer.
-2. Download the Fabric API and move it to the mods folder (.minecraft/mods).
-3. Download the mod and move it to the mods folder (.minecraft/mods).
+## 下載指示
 
-## License
+由於尚未完成，若欲遊玩Fabric的未完整版請去Discord找。
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+## Version
+
+* Minecraft版本: 1.18.2
+* Fabric Loader版本: 0.11.3
+* 有Fabric API模組需求
+
+## Support
+
+加入Discord: https://discord.gg/Sxtd5aCezx<br/>
+訂閱作者Koi.戀: https://www.youtube.com/c/Koi%E6%88%80
