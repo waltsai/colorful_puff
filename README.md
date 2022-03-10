@@ -2,7 +2,7 @@
 
 ![image](https://user-images.githubusercontent.com/42564593/157559423-63a22b34-f470-4237-b7ba-b8a5e8c26bd6.png)
 
-Originally made by [Koi.戀](https://m.youtube.com/c/Koi%E6%88%80), Colorful Puff Add-on features:
+Originally made by Koi.戀, Colorful Puff Add-on features:
 * A new mob called Puff and the variants
 * Candy-like blocks and items
 * Candy biome
@@ -17,9 +17,14 @@ This addon is being converted to Fabric by Waltsai, which can be played in Java 
 
 ## Version
 
-Fabric API: ≥0.11.3
-Minecraft Version: 1.18.2
+* Fabric API: [≥0.11.3](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+* Minecraft Version: [1.18.2](https://fabricmc.net/use/installer/)
 
 ## License
 
 This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+
+## Support
+
+Join our Discord: [Link](https://discord.gg/GP85CuaYrB)<br/>
+Subscribe to the original author Koi.戀: [Link](https://m.youtube.com/c/Koi%E6%88%80)
