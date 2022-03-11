@@ -10,19 +10,17 @@
 
 而泡芙模組則由 Waltsai 進行代碼重寫，使其能夠於Fabric平台上運行。
 
-此模組套用CC0許可協議。
-
 ## 下載指示
 
 由於尚未完成，若欲遊玩Fabric的未完整版請去Discord找。
 
-## Version
+## 版本資訊
 
 * Minecraft版本: 1.18.2
 * Fabric Loader版本: 0.11.3
 * 有Fabric API模組需求
 
-## Support
+## 支援
 
 加入Discord: https://discord.gg/Sxtd5aCezx<br/>
 訂閱作者Koi.戀: https://www.youtube.com/c/Koi%E6%88%80
