@@ -19,10 +19,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.chillycoffey.colorfulpuff.ModInit"
+      "com.waltsai.colorfulpuff.ModInit"
     ],
     "client": [
-      "com.chillycoffey.colorfulpuff.ClientModInit"
+      "com.waltsai.colorfulpuff.ClientModInit"
     ]
   },
   "mixins": [
