@@ -19,4 +19,4 @@
 ## 支援
 
 加入Discord: https://discord.gg/Sxtd5aCezx<br/>
-訂閱作者Koi.戀: https://www.youtube.com/c/Koi%E6%88%80
+支持作者Koi.戀: https://www.youtube.com/c/Koi%E6%88%80
