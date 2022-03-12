@@ -16,7 +16,7 @@
 ## 版本資訊
 
 * Minecraft版本: 1.18.2
-* Fabric Loader版本: 0.11.3
+* Fabric Loader版本: >=0.11.3
 * 有Fabric API模組需求
 
 ## 社群
