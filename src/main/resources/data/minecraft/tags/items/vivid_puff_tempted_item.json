@@ -26,6 +26,18 @@
     "minecraft:fishing_rod",
     "minecraft:compass",
     "minecraft:paper",
-    "minecraft:clock"
+    "minecraft:clock",
+    "colorfulpuff:caramel_candy_block",
+    "colorfulpuff:aqua_candy_block",
+    "colorfulpuff:lime_candy_block",
+    "colorfulpuff:ice_candy_block",
+    "colorfulpuff:orange_candy_block",
+    "colorfulpuff:pink_candy_block",
+    "colorfulpuff:red_candy_block",
+    "colorfulpuff:yellow_candy_block",
+    "colorfulpuff:sugar_block",
+    "colorfulpuff:gold_cookie_block",
+    "colorfulpuff:mint_cookie_block",
+    "colorfulpuff:rose_cookie_block"
   ]
 }

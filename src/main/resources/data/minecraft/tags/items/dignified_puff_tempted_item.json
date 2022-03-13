@@ -10,6 +10,10 @@
     "minecraft:sugar",
     "minecraft:cake",
     "minecraft:baked_potato",
-    "minecraft:writable_book"
+    "minecraft:writable_book",
+    "colorfulpuff:pink_candy_block",
+    "colorfulpuff:red_candy_block",
+    "colorfulpuff:yellow_candy_block",
+    "colorfulpuff:mint_cookie_block"
   ]
 }
