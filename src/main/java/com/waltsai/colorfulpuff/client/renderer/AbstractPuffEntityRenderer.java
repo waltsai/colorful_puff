@@ -20,9 +20,9 @@ public abstract class AbstractPuffEntityRenderer<T extends PuffBaseEntity> exten
         float f;
 
         if(entity.isBaby()) {
-            f = (float) ModConfig.getDouble("MiniPuffHeight") / 2f;
+            f = (float) ModConfig.getDouble("MiniPuffSize");
         } else {
-            f = (float) ModConfig.getDouble("PuffHeight") / 2f;
+            f = (float) ModConfig.getDouble("PuffSize");
         }
 
         matrices.scale(f, f, f);

@@ -56,10 +56,10 @@ public class ModInit implements ModInitializer {
                 "## If puff entities are able to blink.\n" +
                 "PuffBlinking=true\n" +
                 "\n" +
-                "## Puff entities' height(Human is 2m tall).\n" +
-                "PuffHeight=1.76\n" +
-                "## Mini Puff entities' height(Human is 2m tall).\n" +
-                "MiniPuffHeight=1.32\n";
+                "## Puff entities' size(Compared to Humans' size).\n" +
+                "PuffSize=1.76\n" +
+                "## Mini Puff entities' size(Compared to Humans' size).\n" +
+                "MiniPuffSize=1.32\n";
 
         return str;
     }
