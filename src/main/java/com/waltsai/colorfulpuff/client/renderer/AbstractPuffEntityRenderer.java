@@ -1,7 +1,7 @@
 package com.waltsai.colorfulpuff.client.renderer;
 
 import com.waltsai.colorfulpuff.ModInit;
-import com.waltsai.colorfulpuff.config.ModConfig;
+import com.waltsai.colorfulpuff.core.ModConfigs;
 import com.waltsai.colorfulpuff.entity.mob.PuffBaseEntity;
 import com.waltsai.colorfulpuff.client.model.PuffEntityModel;
 import net.minecraft.client.render.entity.BipedEntityRenderer;
@@ -20,9 +20,9 @@ public abstract class AbstractPuffEntityRenderer<T extends PuffBaseEntity> exten
         float f;
 
         if(entity.isBaby()) {
-            f = (float) ModConfig.getDouble("MiniPuffSize");
+            f = (float) ModConfigs.getDouble("MiniPuffSize");
         } else {
-            f = (float) ModConfig.getDouble("PuffSize");
+            f = (float) ModConfigs.getDouble("PuffSize");
         }
 
         matrices.scale(f, f, f);
@@ -34,9 +34,9 @@ public abstract class AbstractPuffEntityRenderer<T extends PuffBaseEntity> exten
         EntityPose entityPose = (entity).getPose();
         if (entityPose == EntityPose.SLEEPING) {
             if(entity.isBaby()) {
-                matrices.translate(0, -0.34F, 0);
+                matrices.translate(0, (float) ModConfigs.getDouble("MiniPuffSize") - 1, 0);
             } else {
-                matrices.translate(0, -0.12F, 0);
+                matrices.translate(0, (float) ModConfigs.getDouble("PuffSize") - 1, 0);
             }
         }
     }

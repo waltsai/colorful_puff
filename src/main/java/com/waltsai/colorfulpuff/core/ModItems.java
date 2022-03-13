@@ -13,6 +13,8 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class ModItems {
     public static final Item PUFF_SPAWN_EGG = new SpawnEggItem(ModEntities.PUFF, -1, -1, new Item.Settings().maxCount(64).rarity(Rarity.UNCOMMON)) {
         @Override
@@ -36,6 +38,19 @@ public class ModItems {
     public static void registerItems() {
         Registry.register(Registry.ITEM, new Identifier(ModInit.MODID, "puff_spawn_egg"), PUFF_SPAWN_EGG);
         Registry.register(Registry.ITEM, new Identifier(ModInit.MODID, "mini_puff_spawn_egg"), MINI_PUFF_SPAWN_EGG);
-        FabricItemGroupBuilder.create(new Identifier(ModInit.MODID, "mod_item")).icon(() -> new ItemStack(ModItems.PUFF_SPAWN_EGG)).appendItems(stacks -> stacks.add(new ItemStack(ModItems.PUFF_SPAWN_EGG))).build();
+        FabricItemGroupBuilder.create(new Identifier(ModInit.MODID, "mod_item")).icon(() -> new ItemStack(ModItems.PUFF_SPAWN_EGG))
+                .appendItems(stacks -> {
+                    stacks.add(new ItemStack(ModItems.PUFF_SPAWN_EGG));
+                    stacks.add(new ItemStack(ModItems.MINI_PUFF_SPAWN_EGG));
+                    stacks.add(new ItemStack(ModBlocks.CARAMEL_CANDY_BLOCK));
+                    stacks.add(new ItemStack(ModBlocks.AQUA_CANDY_BLOCK));
+                    stacks.add(new ItemStack(ModBlocks.LIME_CANDY_BLOCK));
+                    stacks.add(new ItemStack(ModBlocks.ICE_CANDY_BLOCK));
+                    stacks.add(new ItemStack(ModBlocks.ORANGE_CANDY_BLOCK));
+                    stacks.add(new ItemStack(ModBlocks.PINK_CANDY_BLOCK));
+                    stacks.add(new ItemStack(ModBlocks.RED_CANDY_BLOCK));
+                    stacks.add(new ItemStack(ModBlocks.YELLOW_CANDY_BLOCK));
+                    stacks.add(new ItemStack(ModBlocks.SUGAR_BLOCK));
+                }).build();
     }
 }

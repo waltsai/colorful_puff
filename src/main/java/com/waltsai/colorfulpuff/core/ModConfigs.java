@@ -1,18 +1,15 @@
-package com.waltsai.colorfulpuff.config;
+package com.waltsai.colorfulpuff.core;
 
-import com.google.common.collect.ImmutableMap;
-import com.waltsai.colorfulpuff.ModInit;
+import com.waltsai.colorfulpuff.SimpleConfig;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-public class ModConfig {
+public class ModConfigs {
     public static SimpleConfig CONFIG;
     private static final HashMap<String, Object> CONFIG_DATAS = new HashMap<>();
 
     public static void createConfigData() {
-        CONFIG = SimpleConfig.of("config").provider(ModInit::configInitialData).request();
+        CONFIG = SimpleConfig.of("config").provider(ModConfigs::configInitialData).request();
 
         register("PuffBlinking", true);
         register("PuffSize", 0.88);
@@ -49,5 +46,25 @@ public class ModConfig {
 
     public static String getString(String key) {
         return (String) CONFIG_DATAS.get(key);
+    }
+
+    public static String configInitialData(String filename) {
+        String str = "### Configuration for Colorful Puff Mod\n" +
+                "# ============================\n" +
+                "# By editing the variables below,\n" +
+                "# you can easily modify the mod settings.\n" +
+                "# \n" +
+                "# If you need help, you can find support in our Discord.\n" +
+                "\n" +
+                "\n" +
+                "## If puff entities are able to blink.\n" +
+                "PuffBlinking=true\n" +
+                "\n" +
+                "## Puff entities' size(Compared to Humans' size).\n" +
+                "PuffSize=0.88\n" +
+                "## Mini Puff entities' size(Compared to Humans' size).\n" +
+                "MiniPuffSize=0.66\n";
+
+        return str;
     }
 }

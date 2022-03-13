@@ -258,6 +258,8 @@ public class PuffEntity extends PuffBaseEntity {
                             itemStack.decrement(1);
                         }
                     }
+
+                    return ActionResult.SUCCESS;
                 }
             }
             if(itemStack.isOf(Items.ENCHANTED_GOLDEN_APPLE)) {
@@ -266,6 +268,8 @@ public class PuffEntity extends PuffBaseEntity {
                 if (!player.getAbilities().creativeMode) {
                     itemStack.decrement(1);
                 }
+
+                return ActionResult.SUCCESS;
             }
             if(this.isTamed()) {
                 if (ClothType.byItem(item) != null && !this.havingCloth(ClothType.byItem(item))) {

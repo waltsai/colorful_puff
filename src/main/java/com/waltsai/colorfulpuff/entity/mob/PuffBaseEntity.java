@@ -1,6 +1,6 @@
 package com.waltsai.colorfulpuff.entity.mob;
 
-import com.waltsai.colorfulpuff.config.ModConfig;
+import com.waltsai.colorfulpuff.core.ModConfigs;
 import com.waltsai.colorfulpuff.core.ModParticles;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
@@ -82,7 +82,7 @@ public abstract class PuffBaseEntity extends TameableEntity {
             this.setInBlinkAnimation(false);
         }
 
-        if(ModConfig.getBoolean("PuffBlinking")) {
+        if(ModConfigs.getBoolean("PuffBlinking")) {
             if (this.noBlinkingAge == 0) {
                 int i = this.random.nextInt(11999);
                 if (i < 35) {

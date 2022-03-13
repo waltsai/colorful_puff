@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "colorfulpuff:caramel_candy_block",
+    "colorfulpuff:aqua_candy_block",
+    "colorfulpuff:lime_candy_block",
+    "colorfulpuff:ice_candy_block",
+    "colorfulpuff:orange_candy_block",
+    "colorfulpuff:pink_candy_block",
+    "colorfulpuff:red_candy_block",
+    "colorfulpuff:yellow_candy_block",
+    "colorfulpuff:sugar_block"
+  ]
+}

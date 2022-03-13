@@ -1,4 +1,4 @@
-package com.waltsai.colorfulpuff.config;
+package com.waltsai.colorfulpuff;
 
 /*
  * Copyright (c) 2021 magistermaks
@@ -22,7 +22,6 @@ package com.waltsai.colorfulpuff.config;
  * THE SOFTWARE.
  */
 
-import com.waltsai.colorfulpuff.ModInit;
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

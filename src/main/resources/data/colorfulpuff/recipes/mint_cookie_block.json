@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "colorfulpuff:gold_cookie_block"
+  },
+  "result": "colorfulpuff:mint_cookie_block",
+  "count": 1
+}

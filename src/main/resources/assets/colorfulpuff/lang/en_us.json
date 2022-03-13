@@ -1,6 +1,18 @@
 {
   "entity.colorfulpuff.mifu": "実芙",
   "entity.colorfulpuff.puff": "Puff",
+  "block.colorfulpuff.caramel_candy_block": "Caramel Candy Block",
+  "block.colorfulpuff.aqua_candy_block": "Aqua Candy Block",
+  "block.colorfulpuff.lime_candy_block": "Lime Candy Block",
+  "block.colorfulpuff.ice_candy_block": "Ice Blue Candy Block",
+  "block.colorfulpuff.orange_candy_block": "Orange Candy Block",
+  "block.colorfulpuff.red_candy_block": "Red Candy Block",
+  "block.colorfulpuff.pink_candy_block": "Pink Candy Block",
+  "block.colorfulpuff.yellow_candy_block": "Yellow Candy Block",
+  "block.colorfulpuff.sugar_block": "Sugar Block",
+  "block.colorfulpuff.gold_cookie_block": "Gold Cookie Block",
+  "block.colorfulpuff.mint_cookie_block": "Mint Cookie Block",
+  "block.colorfulpuff.rose_cookie_block": "Rose Cookie Block",
   "item.colorfulpuff.puff_spawn_egg": "Puff Spawn Egg",
   "item.colorfulpuff.mini_puff_spawn_egg": "Mini Puff Spawn Egg",
   "itemGroup.colorfulpuff.mod_item": "Puff Mod"

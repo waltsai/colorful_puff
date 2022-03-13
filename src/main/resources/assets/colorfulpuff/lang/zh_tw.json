@@ -1,6 +1,18 @@
 {
   "entity.colorfulpuff.mifu": "実芙",
   "entity.colorfulpuff.puff": "泡芙",
+  "block.colorfulpuff.caramel_candy_block": "糖果方塊(焦糖)",
+  "block.colorfulpuff.aqua_candy_block": "糖果方塊(水藍)",
+  "block.colorfulpuff.lime_candy_block": "糖果方塊(萊姆)",
+  "block.colorfulpuff.ice_candy_block": "糖果方塊(冰藍)",
+  "block.colorfulpuff.orange_candy_block": "糖果方塊(橘)",
+  "block.colorfulpuff.red_candy_block": "糖果方塊(紅)",
+  "block.colorfulpuff.pink_candy_block": "糖果方塊(粉)",
+  "block.colorfulpuff.yellow_candy_block": "糖果方塊(黃)",
+  "block.colorfulpuff.sugar_block": "砂糖方塊",
+  "block.colorfulpuff.gold_cookie_block": "餅乾方塊(黃金)",
+  "block.colorfulpuff.mint_cookie_block": "餅乾方塊(薄荷)",
+  "block.colorfulpuff.rose_cookie_block": "餅乾方塊(玫瑰)",
   "item.colorfulpuff.puff_spawn_egg": "泡芙 生怪蛋",
   "item.colorfulpuff.mini_puff_spawn_egg": "迷你芙 生怪蛋",
   "itemGroup.colorfulpuff.mod_item": "泡芙模組"

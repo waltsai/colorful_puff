@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "colorfulpuff:block/aqua_candy_block"
+  }
+}
