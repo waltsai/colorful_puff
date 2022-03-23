@@ -2,18 +2,20 @@ package com.waltsai.colorfulpuff.core;
 
 import com.waltsai.colorfulpuff.SimpleConfig;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class ModConfigs {
     public static SimpleConfig CONFIG;
     private static final HashMap<String, Object> CONFIG_DATAS = new HashMap<>();
 
     public static void createConfigData() {
-        CONFIG = SimpleConfig.of("config").provider(ModConfigs::configInitialData).request();
+        CONFIG = SimpleConfig.of("config").request();
 
         register("PuffBlinking", true);
-        register("PuffSize", 0.88);
-        register("MiniPuffSize", 0.66);
+        register("PuffDamageMultiplier", 1.0);
     }
 
     public static void register(String valueKey, String initialValue) {
@@ -48,23 +50,21 @@ public class ModConfigs {
         return (String) CONFIG_DATAS.get(key);
     }
 
-    public static String configInitialData(String filename) {
-        String str = "### Configuration for Colorful Puff Mod\n" +
-                "# ============================\n" +
-                "# By editing the variables below,\n" +
-                "# you can easily modify the mod settings.\n" +
-                "# \n" +
-                "# If you need help, you can find support in our Discord.\n" +
-                "\n" +
-                "\n" +
-                "## If puff entities are able to blink.\n" +
-                "PuffBlinking=true\n" +
-                "\n" +
-                "## Puff entities' size(Compared to Humans' size).\n" +
-                "PuffSize=0.88\n" +
-                "## Mini Puff entities' size(Compared to Humans' size).\n" +
-                "MiniPuffSize=0.66\n";
+    public static List<String> configInitialData() {
+        List<String> list = new ArrayList<>();
+        list.add("# 泡芙模組配置文件");
+        list.add("# ============================");
+        list.add("# 透過修改文件中每個變數的值，你能夠更改遊戲模組的各數值。");
+        list.add("# (true=是 false=否)");
+        list.add("");
+        list.add("");
+        list.add("## 泡芙是否能夠眨眼?");
+        list.add("PuffBlinking=true");
+        list.add("");
+        list.add("");
+        list.add("## 設定泡芙攻擊傷害乘數:(原傷害*乘數=真實傷害)");
+        list.add("PuffDamageMultiplier=1.0");
 
-        return str;
+        return list;
     }
 }
