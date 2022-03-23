@@ -17,6 +17,8 @@ import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.sensor.Sensor;
 import net.minecraft.entity.ai.brain.task.*;
 import net.minecraft.entity.mob.*;
+import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.entity.vehicle.MinecartEntity;
 import net.minecraft.util.TimeHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
@@ -87,7 +89,7 @@ public class OriginalPuffBrain {
             }
         }
 
-        if (!brain.hasMemoryModule(MemoryModuleType.RIDE_TARGET)) {
+        if (!brain.hasMemoryModule(MemoryModuleType.RIDE_TARGET) && (puffEntity.getVehicle() != null && (puffEntity.getVehicle() instanceof MinecartEntity || puffEntity.getVehicle() instanceof BoatEntity))) {
             puffEntity.stopRiding();
         }
     }

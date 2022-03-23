@@ -33,16 +33,11 @@ public class PuffEntityModel<T extends PuffBaseEntity> extends PlayerEntityModel
     public void setAngles(T livingEntity, float f, float g, float h, float i, float j) {
         if (livingEntity.isInSittingPose()) {
             boolean bl = livingEntity.getRoll() > 4;
-            boolean bl2 = livingEntity.isInSwimmingPose();
             this.head.yaw = i * 0.017453292F;
             if (bl) {
                 this.head.pitch = -0.7853982F;
             } else if (this.leaningPitch > 0.0F) {
-                if (bl2) {
-                    this.head.pitch = this.lerpAngle(this.leaningPitch, this.head.pitch, -0.7853982F);
-                } else {
-                    this.head.pitch = this.lerpAngle(this.leaningPitch, this.head.pitch, j * 0.017453292F);
-                }
+                this.head.pitch = this.lerpAngle(this.leaningPitch, this.head.pitch, j * 0.017453292F);
             } else {
                 this.head.pitch = j * 0.017453292F;
             }
@@ -72,8 +67,10 @@ public class PuffEntityModel<T extends PuffBaseEntity> extends PlayerEntityModel
             this.body.pivotY = 0.0F + k;
             this.leftArm.pivotY = 2.0F + k;
             this.rightArm.pivotY = 2.0F + k;
+
         } else if(this.riding) {
             super.setAngles(livingEntity, f, g, h, i, j);
+
             float k = 8.5F;
             this.rightLeg.pivotY = 12.0F + k;
             this.leftLeg.pivotY = 12.0F + k;
@@ -82,6 +79,7 @@ public class PuffEntityModel<T extends PuffBaseEntity> extends PlayerEntityModel
             this.body.pivotY = 0.0F + k;
             this.leftArm.pivotY = 2.0F + k;
             this.rightArm.pivotY = 2.0F + k;
+
         } else {
             super.setAngles(livingEntity, f, g, h, i, j);
         }

@@ -40,6 +40,10 @@ public abstract class PuffEyeFeatureRenderer<T extends PuffBaseEntity, M extends
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+        if(entity.isInvisible()) {
+            return;
+        }
+
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(getTexture(entity)));
         if(entity.isSleeping()) {
             this.getContextModel().eyebrows.render(matrices, vertexConsumer, light, LivingEntityRenderer.getOverlay(entity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
@@ -66,8 +70,6 @@ public abstract class PuffEyeFeatureRenderer<T extends PuffBaseEntity, M extends
             }
         }
     }
-
-
 
     private void setEyelidCoverRate(MatrixStack matrices, float f, float headPitch, boolean isSitting, boolean isRiding) {
         float offset = (1 - f) * -0.0625F;

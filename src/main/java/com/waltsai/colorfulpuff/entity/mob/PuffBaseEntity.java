@@ -6,10 +6,14 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.MinecraftServer;
@@ -22,10 +26,13 @@ import net.minecraft.world.poi.PointOfInterestStorage;
 import net.minecraft.world.poi.PointOfInterestType;
 
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.BiPredicate;
 
 public abstract class PuffBaseEntity extends TameableEntity {
     protected static final TrackedData<Boolean> BLINK;
+    public static final UUID ATTACKING_DAMAGE_BOOST_ID = UUID.fromString("601ACE1D-8DC6-435F-A8B4-1F15B4B6800C");
+    public static EntityAttributeModifier ATTACKING_DAMAGE_BOOST = null;
     public float blinkingAge;
     public boolean isEntityBlinking;
     private int noBlinkingAge;
@@ -72,6 +79,11 @@ public abstract class PuffBaseEntity extends TameableEntity {
     public void tickMovement() {
         super.tickMovement();
         this.tickHandSwing();
+    }
+
+    @Override
+    protected void mobTick() {
+        super.mobTick();
     }
 
     @Override

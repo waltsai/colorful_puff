@@ -51,6 +51,9 @@ public class ModItems {
                     stacks.add(new ItemStack(ModBlocks.RED_CANDY_BLOCK));
                     stacks.add(new ItemStack(ModBlocks.YELLOW_CANDY_BLOCK));
                     stacks.add(new ItemStack(ModBlocks.SUGAR_BLOCK));
+                    stacks.add(new ItemStack(ModBlocks.GOLD_COOKIE_BLOCK));
+                    stacks.add(new ItemStack(ModBlocks.MINT_COOKIE_BLOCK));
+                    stacks.add(new ItemStack(ModBlocks.ROSE_COOKIE_BLOCK));
                 }).build();
     }
 }

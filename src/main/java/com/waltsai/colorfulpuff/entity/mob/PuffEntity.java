@@ -89,6 +89,9 @@ public class PuffEntity extends PuffBaseEntity {
             this.updateAttributes();
             this.prevCloth = this.getClothType();
         }
+
+        if (!this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).hasModifier(ATTACKING_DAMAGE_BOOST))
+            this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).addTemporaryModifier(ATTACKING_DAMAGE_BOOST);
     }
 
     @Override
@@ -200,6 +203,7 @@ public class PuffEntity extends PuffBaseEntity {
 
         if (this.world instanceof ServerWorld) {
             this.reinitializeBrain((ServerWorld) this.world);
+            this.setBreedingAge(this.getBreedingAge());
         }
 
         brain.refreshActivities(this.world.getTimeOfDay(), this.world.getTime());
@@ -242,7 +246,7 @@ public class PuffEntity extends PuffBaseEntity {
                     this.brain.forget(MemoryModuleType.ANGRY_AT);
                     this.brain.forget(MemoryModuleType.ATTACK_TARGET);
                     return ActionResult.SUCCESS;
-                } else if(this.getHealth() < this.getMaxHealth()) {
+                } else if(this.getHealth() < this.getMaxHealth() && this.isOwner(player)) {
                     this.world.sendEntityStatus(this, (byte) 14);
                     if(itemStack.getItem().getFoodComponent() != null) {
                         this.heal(itemStack.getItem().getFoodComponent().getSaturationModifier() * 1.75F);
@@ -262,7 +266,7 @@ public class PuffEntity extends PuffBaseEntity {
                     return ActionResult.SUCCESS;
                 }
             }
-            if(itemStack.isOf(Items.ENCHANTED_GOLDEN_APPLE)) {
+            if(itemStack.isOf(Items.ENCHANTED_GOLDEN_APPLE) && this.isOwner(player)) {
                 this.setCanGrow(true);
                 this.growUp(28800);
                 if (!player.getAbilities().creativeMode) {
@@ -271,7 +275,7 @@ public class PuffEntity extends PuffBaseEntity {
 
                 return ActionResult.SUCCESS;
             }
-            if(this.isTamed()) {
+            if(this.isOwner(player)) {
                 if (ClothType.byItem(item) != null && !this.havingCloth(ClothType.byItem(item))) {
                     this.setClothType(ClothType.byItem(item));
                     this.world.sendEntityStatus(this, (byte) (61 + ClothType.byItem(item).getId()));

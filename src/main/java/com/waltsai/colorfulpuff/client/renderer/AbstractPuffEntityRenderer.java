@@ -20,9 +20,9 @@ public abstract class AbstractPuffEntityRenderer<T extends PuffBaseEntity> exten
         float f;
 
         if(entity.isBaby()) {
-            f = (float) ModConfigs.getDouble("MiniPuffSize");
+            f = 0.66F;
         } else {
-            f = (float) ModConfigs.getDouble("PuffSize");
+            f = 0.88F;
         }
 
         matrices.scale(f, f, f);
@@ -34,9 +34,9 @@ public abstract class AbstractPuffEntityRenderer<T extends PuffBaseEntity> exten
         EntityPose entityPose = (entity).getPose();
         if (entityPose == EntityPose.SLEEPING) {
             if(entity.isBaby()) {
-                matrices.translate(0, (float) ModConfigs.getDouble("MiniPuffSize") - 1, 0);
+                matrices.translate(0, -0.34F, 0);
             } else {
-                matrices.translate(0, (float) ModConfigs.getDouble("PuffSize") - 1, 0);
+                matrices.translate(0, -0.12F, 0);
             }
         }
     }
